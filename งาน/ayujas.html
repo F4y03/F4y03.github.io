@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ครบรอบ 1 เดือน</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fff0f5;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        header h1 {
+            font-size: 3rem;
+            color: #ff1493;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 20px;
+        }
+        .greeting {
+            font-size: 2rem;
+            color: #ff69b4;
+            background: linear-gradient(90deg, #ff1493, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px auto;
+            padding: 10px 0;
+        }
+        main p {
+            font-size: 1.5rem;
+            color: #333;
+            line-height: 1.8;
+            font-family: 'Prompt', sans-serif;
+            margin: 20px auto;
+            text-align: center;
+            max-width: 600px;
+        }
+
+
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            height: 300px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            width: 80%; /* ต้องใหญ่กว่าขนาดของภาพรวม */
+        }
+
+        .carousel-images img {
+            width: 30%;
+            height: 30%;
+            object-fit: cover;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+
+        .carousel-buttons button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+        }
+
+        .carousel-buttons button.active {
+            background-color: #ff1493;
+        }
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-button a {
+            display: inline-block;
+            background-color: #ff1493;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button a:hover {
+            background-color: #ff69b4;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button a:active {
+            background-color: #ff8da1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>💖 ครบรอบ 1 เดือน 💖</h1>
+    </header>
+    <main>
+        <div class="greeting">💖 Happy One-Month Anniversary! 💖</div>
+        
+        <!-- Carousel -->
+        <div class="carousel">
+            <div class="carousel-images">
+                <img src="images/2.jpg" alt="One Month Anniversary">
+                <img src="images/3.jpg" alt="Celebration">
+                <img src="images/4.jpg" alt="Special Moment">
+                <img src="images/5.jpg" alt="Special Moment">
+                <img src="images/6.jpg" alt="Special Moment">
+                <img src="images/7.jpg" alt="Special Moment">
+                <img src="images/8.jpg" alt="Special Moment">
+                <img src="images/9.jpg" alt="Special Moment">
+                <img src="images/10.jpg" alt="Special Moment">
+                <img src="images/11.jpg" alt="Special Moment">
+                <img src="images/12.jpg" alt="Special Moment">
+                <img src="images/13.jpg" alt="Special Moment">
+                <img src="images/14.jpg" alt="Special Moment">
+            </div>
+            <div class="carousel-buttons">
+                <button class="active"></button>
+                <button></button>
+                <button></button>
+            </div>
+        </div>
+
+        <p>ขอบคุณสำหรับทุกช่วงเวลาที่พิเศษในเดือนแรกของเรา 🌹 ทุกวันของเราเต็มไปด้วยความทรงจำที่งดงาม และเราหวังว่าช่วงเวลาต่อจากนี้จะพิเศษยิ่งขึ้นไปอีก 💕</p>
+        <div class="back-button">
+            <a href="index.html">กลับไปหน้าก่อน</a>
+        </div>
+    </main>
+
+    <script>
+        const carouselImages = document.querySelector('.carousel-images');
+        const buttons = document.querySelectorAll('.carousel-buttons button');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            const offset = -index * 100; // เลื่อนไปทีละ 100% ต่อภาพ
+            carouselImages.style.transform = `translateX(${offset}%)`;
+            buttons.forEach((button, i) => {
+                button.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % buttons.length; // ไปยังภาพถัดไป
+            showSlide(currentIndex);
+        }
+
+        // Auto-slide every 3 seconds
+        setInterval(nextSlide, 3000);
+
+        // Add click event for buttons
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                currentIndex = index; // เลือกภาพด้วยปุ่ม
+                showSlide(currentIndex);
+            });
+        });
+    </script>
+</body>
+</html>

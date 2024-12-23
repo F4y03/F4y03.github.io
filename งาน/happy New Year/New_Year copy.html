@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai New Year Celebration</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&family=Dancing+Script:wght@700&display=swap');
+
+        body {
+            margin: 0;
+            background: linear-gradient(to bottom, #001529, #003366);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .greetings-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 100;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5em;
+            color: white;
+            margin: 0 0 20px 0;
+            animation: titleGlow 2s infinite alternate;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .wishes {
+            font-size: 1.8em;
+            color: #FFD700;
+            margin: 10px 0;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .wishes.thai {
+            font-weight: 300;
+            animation-delay: 0.5s;
+        }
+
+        .wishes.english {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            color: #FFA500;
+            animation-delay: 1s;
+        }
+
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .audio-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Kanit', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .audio-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .volume-control {
+            width: 100px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .volume-control::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .volume-control::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .music-info-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 50px 70px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Kanit', sans-serif;
+            transition: all 0.3s ease;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: inline-block;
+            font-size: 1.2em;
+        }
+
+        .music-info-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .lantern {
+            position: absolute;
+            width: 60px;
+            height: 90px;
+            bottom: -100px;
+            animation: float 8s linear infinite;
+        }
+
+        .lantern-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 222, 173, 0.8);
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+        }
+
+        .lantern-top {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 15px;
+            background: #cd853f;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .lantern-bottom {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 10px;
+            background: #8b4513;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .lantern-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 165, 0, 0.3), transparent);
+            border-radius: 30px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                           0 0 20px rgba(255, 215, 0, 0.8),
+                           0 0 30px rgba(255, 165, 0, 0.8);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                           0 0 40px rgba(255, 215, 0, 0.8),
+                           0 0 60px rgba(255, 165, 0, 0.8);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) translateX(calc(100px * var(--drift))) rotate(calc(10deg * var(--drift)));
+                opacity: 0;
+            }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(255, 165, 0, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(255, 165, 0, 0.8); }
+        }
+    </style>
+</head>
+<body>
+    <div class="greetings-container">
+        <h1 class="main-title">Happy New Year 2024!</h1>
+        <p class="wishes thai">ขออวยพรให้ปีใหม่นี้เต็มไปด้วยความสุข ความสำเร็จ และสิ่งดีๆ</p>
+        <p class="wishes english">May your dreams take flight like these lanterns, lighting up your path to success!</p>
+    </div>
+    
+    <canvas class="fireworks" id="fireworks"></canvas>
+
+    <div class="audio-controls">
+        <button class="audio-btn" id="audioToggle">▶️ เล่นเพลง</button>
+        <input type="range" class="volume-control" id="volumeControl" min="0" max="1" step="0.1" value="0.5">
+    </div>
+
+    <button class="music-info-btn" id="musicInfoBtn">มีเพลงให้ฟังด้วยนะ</button>
+
+    <audio id="bgMusic" loop>
+        <source src="images/123456.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Fireworks code
+        const canvas = document.getElementById('fireworks');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function randomColor() {
+            return `hsl(${Math.random() * 360}, 100%, 50%)`;
+        }
+
+        function Firework(x, y, color) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.r = Math.random() * 3 + 2;
+            this.dx = Math.random() * 4 - 2;
+            this.dy = Math.random() * 4 - 2;
+            this.alpha = 1;
+        }
+
+        Firework.prototype.update = function() {
+            this.x += this.dx;
+            this.y += this.dy;
+            this.alpha -= 0.02;
+        };
+
+        Firework.prototype.draw = function() {
+            ctx.globalAlpha = this.alpha;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        };
+
+        let fireworks = [];
+
+        function createFireworks() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height / 2;
+            const color = randomColor();
+
+            for (let i = 0; i < 50; i++) {
+                fireworks.push(new Firework(x, y, color));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            fireworks.forEach((firework, i) => {
+                if (firework.alpha <= 0) {
+                    fireworks.splice(i, 1);
+                } else {
+                    firework.update();
+                    firework.draw();
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Lantern code
+        function createLantern() {
+            const lantern = document.createElement('div');
+            lantern.className = 'lantern';
+            
+            lantern.style.left = `${Math.random() * (window.innerWidth - 60)}px`;
+            
+            const drift = (Math.random() * 2 - 1);
+            lantern.style.setProperty('--drift', drift);
+
+            const body = document.createElement('div');
+            body.className = 'lantern-body';
+            
+            const top = document.createElement('div');
+            top.className = 'lantern-top';
+            
+            const bottom = document.createElement('div');
+            bottom.className = 'lantern-bottom';
+            
+            const glow = document.createElement('div');
+            glow.className = 'lantern-glow';
+
+            lantern.appendChild(body);
+            lantern.appendChild(top);
+            lantern.appendChild(bottom);
+            lantern.appendChild(glow);
+            
+            document.body.appendChild(lantern);
+        }
+
+        setInterval(createLantern, 500);
+
+        // Music button
+        const audioToggle = document.getElementById('audioToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        const musicInfoBtn = document.getElementById('musicInfoBtn');
+        const volumeControl = document.getElementById('volumeControl');
+
+        audioToggle.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                audioToggle.textContent = '⏸️ หยุดเพลง';
+            } else {
+                bgMusic.pause();
+                audioToggle.textContent = '▶️ เล่นเพลง';
+            }
+        });
+
+        musicInfoBtn.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicInfoBtn.textContent = 'หยุดเพลง';
+            } else {
+                bgMusic.pause();
+                musicInfoBtn.textContent = 'มีเพลงให้ฟังด้วยนะ';
+            }
+        });
+
+        volumeControl.addEventListener('input', function() {
+            bgMusic.volume = volumeControl.value;
+        });
+
+        // Start fireworks
+        setInterval(createFireworks, 1000);
+        animate();
+    </script>
+</body>
+</html>
