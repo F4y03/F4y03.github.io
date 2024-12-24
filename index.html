@@ -94,7 +94,7 @@
             width: 20px;
             height: 20px;
             position: fixed;
-            background: linear-gradient(45deg, #ff6b6b, #ff4757);
+            background: linear-gradient(45deg, #ffffff, #ffffff);
             clip-path: polygon(50% 0%, 100% 35%, 82% 100%, 50% 82%, 18% 100%, 0% 35%);
             z-index: 1;
         }
@@ -159,6 +159,23 @@
             pointer-events: none;
             z-index: 1;
         }
+
+        .snow {
+            position: fixed;
+            top: -10px;
+            color: #38acf0;
+            text-shadow: 0 0 5px #036fe9;
+            animation: fall linear forwards;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -228,5 +245,25 @@
         // Start creating hearts
         startHeartCreation();
     </script>
+
+<script>
+    function createSnow() {
+        const snow = document.createElement('div');
+        snow.innerHTML = '❄';
+        snow.className = 'snow';
+        snow.style.left = Math.random() * 100 + 'vw';
+        snow.style.animationDuration = Math.random() * 3 + 2 + 's';
+        snow.style.opacity = Math.random();
+        snow.style.fontSize = Math.random() * 10 + 10 + 'px';
+        
+        document.body.appendChild(snow);
+        
+        setTimeout(() => {
+            snow.remove();
+        }, 5000);
+    }
+
+    setInterval(createSnow, 50);
+</script>
 </body>
 </html>
