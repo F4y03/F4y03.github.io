@@ -237,6 +237,131 @@
 
         /* General Styles: Already present styles remain unchanged */
 
+         /* Responsive styles */
+        @media screen and (max-width: 768px) {
+            header h1 {
+                font-size: 2rem !important;
+                padding: 0 10px;
+            }
+
+            main p {
+                font-size: 1.2rem !important;
+                padding: 0 15px;
+                margin: 15px auto;
+            }
+
+            .carousel {
+                height: 400px !important;
+                margin: 10px auto !important;
+            }
+
+            .carousel-images img {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            .flower {
+                width: 80px !important;
+            }
+
+            .flower.left {
+                left: 10px !important;
+            }
+
+            .flower.right {
+                right: 10px !important;
+            }
+
+            .pointing-heart {
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+
+            .pointing-heart .heart-icon {
+                font-size: 30px !important;
+            }
+
+            .pointing-heart .message {
+                font-size: 14px !important;
+                padding: 3px 10px !important;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem !important;
+            }
+
+            .carousel {
+                height: 300px !important;
+            }
+
+            .flower {
+                width: 60px !important;
+            }
+
+            .back-button a {
+                font-size: 16px !important;
+                padding: 8px 16px !important;
+            }
+        }
+
+        /* Original styles */
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-button a {
+            display: inline-block;
+            background-color: #ff1493;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button a:hover {
+            background-color: #ff69b4;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .pointing-heart {
+            position: fixed;
+            bottom: 20px;
+            left: 46%;
+            transform: translateX(50);
+            z-index: 1001;
+            animation: bounce 2s infinite;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        /* Rest of your original styles... */
+        
+        /* Add touch-friendly adjustments */
+        @media (hover: none) {
+            .back-button a:hover {
+                transform: none;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .pointing-heart {
+                padding: 10px;
+            }
+
+            .carousel-buttons button {
+                width: 15px;
+                height: 15px;
+                margin: 0 5px;
+            }
+        }
+
     </style>
 </head>
 <body>
