@@ -422,6 +422,22 @@
             }
         }
 
+        .snow {
+            position: fixed;
+            top: -10px;
+            color: #FF69B4;
+            text-shadow: 0 0 5px #FF1493;
+            animation: fall linear forwards;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -612,6 +628,26 @@
             intervalId = setInterval(nextSlide, 3000);
         });
     </script>
+
+<script>
+    function createSnow() {
+        const snow = document.createElement('div');
+        snow.innerHTML = '❄';
+        snow.className = 'snow';
+        snow.style.left = Math.random() * 100 + 'vw';
+        snow.style.animationDuration = Math.random() * 3 + 2 + 's';
+        snow.style.opacity = Math.random();
+        snow.style.fontSize = Math.random() * 10 + 10 + 'px';
         
+        document.body.appendChild(snow);
+        
+        setTimeout(() => {
+            snow.remove();
+        }, 5000);
+    }
+
+    setInterval(createSnow, 50);
+</script>
+         
 </body>
 </html>
