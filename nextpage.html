@@ -528,32 +528,27 @@
         // Start creating hearts
         startHeartCreation();
 
-        // Audio controls
-        const audio = document.getElementById('bgMusic');
-        const heartMessage = document.getElementById('heart-message');
-        const volumeControls = document.querySelector('.volume-controls');
-        let isPlaying = false;
-        
-        function togglePlay() {
-            if (!isPlaying) {
-                audio.play();
-                heartMessage.textContent = 'กดที่หัวใจเพื่อหยุดเพลง';
-                volumeControls.style.display = 'block'; // แสดงปุ่มควบคุมระดับเสียง
-                isPlaying = true;
-            } else {
-                audio.pause();
-                heartMessage.textContent = 'กดที่หัวใจเพื่อเล่นเพลง';
-                isPlaying = false;
-            }
-        }
+       // Audio controls
+    const audio = document.getElementById('bgMusic');
+    const heartMessage = document.getElementById('heart-message');
 
-        function adjustVolume(change) {
-            const newVolume = Math.max(0, Math.min(1, audio.volume + change));
-            audio.volume = newVolume;
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play();
+            heartMessage.textContent = 'กดที่หัวใจเพื่อหยุดเพลง';
+        } else {
+            audio.pause();
+            heartMessage.textContent = 'กดที่หัวใจเพื่อเล่นเพลง';
         }
+    }
 
-        // Set initial volume
-        audio.volume = 0.5;
+    // Set initial volume
+    audio.volume = 0.5;
+
+    // Optional: Event listener for when audio ends
+    audio.addEventListener('ended', () => {
+        heartMessage.textContent = 'กดที่หัวใจเพื่อเล่นเพลง';
+    });
     </script>
 
         <!-- Add this script at the bottom of your body tag -->
