@@ -7,13 +7,17 @@
     <style>
         /* ... (previous styles remain the same) ... */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #fff0f5;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #fff0f5;
+    margin: 0;
+    padding: 0;
+    min-height: 50vh; /* กำหนดความสูงขั้นต่ำให้เท่ากับความสูงของ viewport */
+    padding-bottom: 50px; /* เพิ่ม padding ด้านล่างเพื่อให้เนื้อหาไม่ทับกับ pointing-heart */
+    position: relative;
+    overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอน */
+}
+
         .back-button {
             margin-top: 20px;
             text-align: center;
@@ -146,9 +150,11 @@
             height: 100vh;
         }
 
-        .carousel {
+         /* Previous styles remain the same */
+        
+         .carousel {
             position: relative;
-            max-width: 100%;
+            max-width: 800px; /* ปรับความกว้างสูงสุดของ carousel */
             height: 600px;
             margin: 20px auto;
             overflow: hidden;
@@ -158,36 +164,92 @@
 
         .carousel-images {
             display: flex;
-            transition: transform 1s ease-in-out;
-            width: 65%; /* ต้องใหญ่กว่าขนาดของภาพรวม */
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
         }
 
         .carousel-images img {
-            width: 30%;
-            height: 30%;
-            object-fit: cover;
+            min-width: 100%; /* ทำให้รูปเต็มความกว้าง carousel */
+            height: 100%;
+            object-fit: contain; /* ปรับให้รูปคงอัตราส่วน */
         }
 
         .carousel-buttons {
             position: absolute;
-            bottom: 10px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 5px;
+            gap: 10px;
+            z-index: 2;
         }
 
         .carousel-buttons button {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             border: none;
             background-color: rgba(255, 255, 255, 0.6);
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         .carousel-buttons button.active {
             background-color: #ff1493;
+            transform: scale(1.2);
+        }
+
+        /* Add navigation arrows */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        .carousel-nav button {
+            background-color: rgba(255, 20, 147, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-nav button:hover {
+            background-color: rgba(255, 20, 147, 0.9);
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 768px) {
+            .carousel {
+                height: 400px;
+                max-width: 90%;
+            }
+
+            .carousel-nav button {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .carousel {
+                height: 300px;
+            }
         }
 
         header h1 {
@@ -235,10 +297,8 @@
             filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); /* เงาให้ดูสมจริง */
         }
 
-        /* General Styles: Already present styles remain unchanged */
-
          /* Responsive styles */
-        @media screen and (max-width: 768px) {
+         @media screen and (max-width: 768px) {
             header h1 {
                 font-size: 2rem !important;
                 padding: 0 10px;
@@ -381,6 +441,7 @@
         <h1>💖 ครบรอบ 1 เดือน 💖</h1>
     </header>
     <main>
+        
         <div class="carousel">
             <div class="carousel-images">
                 <img src="images/2.jpg" alt="One Month Anniversary">
@@ -397,14 +458,14 @@
                 <img src="images/13.jpg" alt="Special Moment">
                 <img src="images/14.jpg" alt="Special Moment">
             </div>
-            <div class="carousel-buttons">
-                <button class="active"></button>
-                <button></button>
-                <button></button>
+            <div class="carousel-nav">
+                <button onclick="prevSlide()">&#10094;</button>
+                <button onclick="nextSlide()">&#10095;</button>
             </div>
+            <div class="carousel-buttons"></div>
         </div>
 
-        <p>"ครบ 1 เดือนแล้วนะครับ ขอบคุณสำหรับช่วงเวลาดีๆ ที่ผ่านมา และผมหวังว่าเราจะได้สร้างความทรงจำดีๆ ด้วยกันอีกต่อไป" "💕 นะครับ 💕"</p>
+        <p>ขอบคุณสำหรับทุกช่วงเวลาที่พิเศษในเดือนแรกของเรา 🌹 ทุกวันของเราเต็มไปด้วยความทรงจำที่งดงาม และเราหวังว่าช่วงเวลาต่อจากนี้จะพิเศษยิ่งขึ้นไปอีก 💕</p>
         <div class="back-button">
             <a href="index.html">กลับไปหน้าก่อน</a>
         </div>
@@ -495,35 +556,67 @@
         audio.volume = 0.5;
     </script>
 
-        <script>
-            const carouselImages = document.querySelector('.carousel-images');
-            const buttons = document.querySelectorAll('.carousel-buttons button');
-            let currentIndex = 0;
-    
-            function showSlide(index) {
-                const offset = -index * 100; // เลื่อนไปทีละ 100% ต่อภาพ
-                carouselImages.style.transform = `translateX(${offset}%)`;
-                buttons.forEach((button, i) => {
-                    button.classList.toggle('active', i === index);
-                });
-            }
-    
-            function nextSlide() {
-                currentIndex = (currentIndex + 1) % buttons.length; // ไปยังภาพถัดไป
-                showSlide(currentIndex);
-            }
-    
-            // Auto-slide every 3 seconds
-            setInterval(nextSlide, 3000);
-    
-            // Add click event for buttons
+        <!-- Add this script at the bottom of your body tag -->
+    <script>
+        const carouselImages = document.querySelector('.carousel-images');
+        const images = document.querySelectorAll('.carousel-images img');
+        const buttonsContainer = document.querySelector('.carousel-buttons');
+        let currentIndex = 0;
+        
+        // Create navigation buttons dynamically
+        images.forEach((_, index) => {
+            const button = document.createElement('button');
+            button.addEventListener('click', () => goToSlide(index));
+            buttonsContainer.appendChild(button);
+        });
+
+        const buttons = document.querySelectorAll('.carousel-buttons button');
+
+        function updateButtons() {
             buttons.forEach((button, index) => {
-                button.addEventListener('click', () => {
-                    currentIndex = index; // เลือกภาพด้วยปุ่ม
-                    showSlide(currentIndex);
-                });
+                button.classList.toggle('active', index === currentIndex);
             });
-        </script>
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            const offset = -currentIndex * 100;
+            carouselImages.style.transform = `translateX(${offset}%)`;
+            updateButtons();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateSlide();
+        }
+
+        // Initialize the carousel
+        updateButtons();
+
+        // Auto-slide every 3 seconds
+        setInterval(nextSlide, 3000);
+
+        // Optional: Pause auto-slide on hover
+        const carousel = document.querySelector('.carousel');
+        let intervalId = null;
+
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(intervalId);
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            intervalId = setInterval(nextSlide, 3000);
+        });
+    </script>
         
 </body>
 </html>
